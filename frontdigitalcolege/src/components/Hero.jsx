@@ -6,24 +6,36 @@ const Hero = () => {
   const imageUrl = nike;
 
   return (
-    <div className="hero-container" style={{ backgroundColor: '#f5f5f5', position: 'relative' }}>
-      <div className="hero-image-container">
-        <img
-          src={imageUrl}
-          alt="Nike Air Force 1"
-          width="733.51"
-          height="431.61"
-          className="hero-image"
-        />
+    <section className="w-full bg-gray-50 py-20" style={{ backgroundColor: '#f9fafb' }}>
+      <div className="max-w-[993px] mx-auto px-6 flex items-center"> {/* Usando a mesma max-w e removendo justify-between */}
+        <div className="max-w-xl">
+          <p className="text-yellow-500 font-semibold mb-2" style={{ color: '#F59E0B' }}>
+            Melhores ofertas personalizadas
+          </p>
+          <h1 className="text-5xl font-extrabold leading-tight text-gray-900 mb-4">
+            Queima de <br /> estoque Nike <span className="inline-block">🔥</span>
+          </h1>
+          <p className="text-gray-600 mb-6 max-w-md">
+            Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.
+          </p>
+          <button className="bg-pink-600 text-white font-semibold px-8 py-4 rounded-lg hover:bg-pink-700 transition">
+            Ver Ofertas
+          </button>
+        </div>
+
+        <div className="relative w-[600px] h-[400px] flex items-center justify-center"> {/* Centralizei a imagem */}
+          <img
+            src={imageUrl}
+            alt="Nike"
+            className="w-full h-auto"
+            style={{ transform: 'rotate(-15deg)', marginTop: '-40px' }}
+          />
+        </div>
       </div>
-      <div className="oferta-texto-container" style={{ position: 'relative', left: '380px', top: '-318px', width: '510px', height:'352px', }}>
-        <p style={{ color: '#FF9800', fontSize: '16px' }}>Melhores ofertas personalizadas</p>
-        <h1 style={{ fontSize: '3em', fontWeight: 'bold', margin: '0.2em 0' }}>Queima de <span style={{ color: '#212121' }}>estoque Nike</span> 🔥</h1>
-        <p style={{ color: '#757575', fontSize: '1em' }}>Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.</p>
-        <button style={{ backgroundColor: '#E91E63', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '5px', marginTop: '1em', cursor: 'pointer' }}>Ver Ofertas</button>
-      </div>
-    </div>
+    </section>
   );
 };
 
 export default Hero;
+
+

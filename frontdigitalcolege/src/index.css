@@ -22,18 +22,3 @@ body,
 
 }
 
-.hero-image-container {
-  /* Outros estilos */
-  position: relative; /* O container precisa ser 'relative' para o 'absolute' funcionar dentro dele */
- width: 733.51px;
-  height: 431.61px;
-}
-
-.hero-image {
-  /* Outros estilos */
-  position: absolute;
-  left:  650px; /* Posiciona a borda esquerda da imagem a 100px da borda esquerda do container */
-  top: -100px;  /* Posiciona o topo da imagem a 80px do topo do container */
-  transform: rotate(-30.34deg); /* Adiciona a rotação */
-  display: block;
-}
