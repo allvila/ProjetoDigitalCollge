@@ -3,22 +3,158 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Garante que o layout ocupe 100% da tela */
-html,
-body,
-#root {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f9fafb; /* Cor clara de fundo (opcional) */
+
+
+/* Estilo da seção */
+.secao-destaque {
+  background-color: #f9f8fc;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column; /* 👈 ADICIONE ESTA LINHA */
+
+  align-items: center;
 }
-.logo-container {
-  width: 212px; /* Define a largura desejada */
-  display: flex; /* Para alinhar os itens dentro */
-  align-items: center; /* Alinhar verticalmente */
 
 
+
+.titulo-destaque {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 34px;
+  text-align: left;  /* Garante alinhamento à esquerda */
+  width: 100%;       /* Ocupa toda a largura da seção */
+  max-width: 1200px; /* Limita a largura do conteúdo */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+}
+/* Retângulo base */
+.card-destaque {
+  width: 405px;
+  height: 251px;
+  background-color: #d8e3f2;
+  border-radius: 0.75rem;
+  overflow: hidden; /* 🔒 Corta o que sair */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilo base para todas as imagens (opcional) */
+.card-imagem {
+  position: absolute;
+  transition: transform 0.3s ease;
+}
+
+/* 🎯 Classe individual para cada imagem */
+
+.img-camisa {
+  width:242px;
+  height:251px;
+  left:139px;   
+  top:25%;  
+  transform: scale(1.5) rotate(-20.78deg) translate(50px, 50px);
+  /* Altere os valores acima conforme desejar */
+}
+
+.img-sapato {
+     transform: scaleX(-10);
+  margin-top: -50px;
+ width:263px;
+  height:196px;
+  left:120px;   
+  
+  transform: scale(1) rotate(-5deg) translate(50px, 50px);
+}
+
+.img-fone {
+ width:222px;
+  height:262px;
+  left:200px;  
+  
+  transform: scale(0.7) rotate(30deg) translate(50px, 50px);
+}
+
+
+.botao-comprar {
+
+  width: 153px;
+  height: 48px;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  color: #C92071;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.botao-comprar:hover {
+  background-color: #f9f0f5;
+  transform: scale(1.03);
+}
+
+
+.container-botao {
+   
+  position: absolute;
+  bottom: 26px;
+  left: 25%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.selo-desconto {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: #E7FF86;
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 9999px; /* formato de selo redondinho */
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.container-cards {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.bloco-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.descricao-texto {
+  position: absolute;
+  left: 16px;
+  bottom: 64px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.texto-camisa,
+.texto-sapato {
+  width: 172px;
+  height: 72px;
+  font-weight: 700; /* Define a espessura da fonte para negrito */
+  font-size: 32px;  /* Define o tamanho da fonte para 32 pixels */
+  bottom: 94px;
+}
+
+.texto-fone {
+  width: 182px;
+  height: 72px;
+  font-weight: 700; /* Define a espessura da fonte para negrito */
+  font-size: 32px;  /* Define o tamanho da fonte para 32 pixels */
+  bottom: 94px;
 }
 
