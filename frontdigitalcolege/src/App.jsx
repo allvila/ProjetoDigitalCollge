@@ -1,24 +1,20 @@
-import Header from './components/Header';
-import Hero from './components/Hero';
-import ColecoesEmDestaque from './components/ColecoesEmDestaque';
-import ColecoesDestaqueCategorias from './components/ColecoesDestaqueCategorias'; 
-import ProdutosEmAlta from './components/ProdutosEmAlta';
-import OfertaEspecial from './components/OfertaEspecial'; // Importa a exportação padrão (renomeada) e a exportação nomeada
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import ProdutosPage from './pages/Produtos';
 
-export default function App() {
+
+function App() {
   return (
-    <main className="w-full min-h-screen bg-white font-sans overflow-x-hidden">
-      <Header />
-      <Hero />
-      <div className="bg-white">
-        <ColecoesEmDestaque /> {/* Usando o componente de produtos (exportação padrão renomeada) */}
-       {/* Usando o componente de categorias (exportação nomeada) */}
-       <ColecoesDestaqueCategorias />
-       
-       <ProdutosEmAlta /> {/* Usando o componente de produtos em alta */}
-       <OfertaEspecial /> {/* Usando o componente de oferta especial */}
-      </div>
-    </main>
+    <BrowserRouter>
+      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/produtos" element={<ProdutosPage />} />
+        {/* Adicione outras rotas para Categorias, Meus Pedidos, etc., aqui */}
+      </Routes>
+    </BrowserRouter>
   );
 }
+
+export default App;
