@@ -1,0 +1,145 @@
+/* Login.css */
+
+/* Novo: Invólucro para a tela de login que ocupa tudo e tem o fundo lilás */
+.login-screen-wrapper {
+  background-color: #c0c0fd; /* Cor de fundo lilás SÓ para esta tela */
+  min-height: 100vh;         /* Ocupa a altura inteira da tela */
+  width: 100%;               /* Ocupa a largura inteira da tela */
+  display: flex;             /* Usaremos flex para centralizar o conteúdo de 1440px */
+  justify-content: center;   /* Centraliza horizontalmente */
+  align-items: flex-start;   /* Alinha o bloco de conteúdo no topo. Mude para 'center' se quiser centralizar verticalmente também */
+  padding-top: 50px;         /* Um espaço no topo, ajuste conforme necessário. Remova se usar align-items: center */
+  overflow: hidden;          /* Evita barras de rolagem no wrapper */
+}
+
+/* Conteúdo principal da página de login (o bloco de 1440px) */
+/* Renomeado de .login-page-container */
+.login-content-area {
+  width: 1440px;
+  position: relative; /* ESSENCIAL para o posicionamento absoluto dos sapatos e formulário */
+  /* min-height: 100vh; */ /* Não precisa mais de min-height aqui se o wrapper já tem */
+  /* margin: 0 auto; */   /* Não precisa mais se o wrapper está centralizando com flex */
+  /* overflow: hidden; */ /* Pode ser útil aqui também se o conteúdo vazar dos 1440px */
+}
+
+.login-form-block {
+  position: absolute;
+  top: 100px; /* ANTES: top: 30% | Vamos usar pixels para mais controle. Aumente este valor para descer o formulário. */
+  left: 5%;
+  /* transform: translateY(-50%); */ /* <<<---- A parte que causava o problema foi REMOVIDA daqui */
+  z-index: 10;
+}
+
+/* Conteúdo interno do formulário (o container branco) */
+.login-form-content {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  width: 583px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  border: 3px solid #C92071;
+  /* height: 560px; */ /* Se você tinha uma altura fixa, ela permanece aqui */
+  /* box-sizing: border-box; */
+}
+
+/* ... (o restante das suas classes: .form-title, .form-input, .shoe-image-one, etc. permanecem iguais) ... */
+.form-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.form-link {
+  color: #E6007E;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form-forgot-password {
+  display: block;
+  font-size: 12px;
+  color: #555;
+  text-decoration: underline;
+  text-align: left;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.form-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #E6007E;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.form-social-text {
+  font-size: 13px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.form-social-icons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.form-social-icon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.shoe-image-one {
+  position: absolute;
+  top: 200px; /* ANTES: top: 50% | Ajuste este valor para posicionar o sapato verticalmente */
+  right: 10%;
+  transform: rotate(25deg); /* <<<---- REMOVIDO o translateY(-50%) daqui, mas mantido o rotate() */
+  width: 300px;
+  height: auto;
+}
+
+.shoe-image-two {
+  position: absolute;
+  top: 80px; /* ANTES: top: 30% | Ajuste este valor para posicionar o sapato verticalmente */
+  left: 50%;
+  transform: rotate(-15deg); /* <<<---- REMOVIDO o translateY(-50%) daqui, mas mantido o rotate() */
+  width: 300px;
+  height: auto;
+}

@@ -1,7 +1,8 @@
+// components/Header.jsx
 import React, { useState } from 'react';
 import { Menu, Search, ShoppingCart, X } from 'lucide-react';
 import logo from '../assets/logo-header.svg';
-import { Link } from 'react-router-dom'; // Importe o Link aqui
+import { Link } from 'react-router-dom';
 
 function SecondaryNavbar({ isMobile = false }) {
   return (
@@ -72,9 +73,11 @@ export default function Header() {
             <a href="#" className="text-sm text-gray-700 underline underline-offset-4">
               Cadastre-se
             </a>
-            <button className="bg-[#e91e63] hover:bg-pink-600 text-white font-semibold px-5 py-2 rounded-md text-sm" style={{ width: '114px', height: '40px' }}>
-              Entrar
-            </button>
+            <Link to="/login">
+              <button className="bg-[#e91e63] hover:bg-pink-600 text-white font-semibold px-5 py-2 rounded-md text-sm" style={{ width: '114px', height: '40px' }}>
+                Entrar
+              </button>
+            </Link>
             <div className="relative">
               <ShoppingCart className="w-6 h-6 text-pink-600" />
             </div>
@@ -96,9 +99,11 @@ export default function Header() {
               <a href="#" className="text-sm text-gray-700 underline underline-offset-4">
                 Cadastre-se
               </a>
-              <button className="bg-[#e91e63] hover:bg-pink-600 text-white font-semibold px-5 py-2 rounded-md text-sm">
-                Entrar
-              </button>
+              <Link to="/login">
+                <button className="bg-[#e91e63] hover:bg-pink-600 text-white font-semibold px-5 py-2 rounded-md text-sm">
+                  Entrar
+                </button>
+              </Link>
             </div>
           </div>
         )}
