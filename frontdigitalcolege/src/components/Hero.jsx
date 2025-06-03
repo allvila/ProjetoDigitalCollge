@@ -4,7 +4,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import '../index.css'; // Certifique-se de que Tailwind está aqui
+import '../index.css'; // Certifique-se de que Tailwind está aqui aa
 
 // Importando imagens do slide
 import nike from '../assets/nike.png';
@@ -115,3 +115,4 @@ const Hero = () => {
 };
 
 export default Hero;
+// Teste
