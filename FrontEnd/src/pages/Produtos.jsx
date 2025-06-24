@@ -1,10 +1,9 @@
 import React from 'react';
-import Header from '../components/Header';
 import ProdutosFiltrados from '../components/ProdutosFiltrados';
 import Footer from '../components/Footer';
 
+
 function ProdutosPage() {
-  // Dados de exemplo dos seus produtos (substitua pelos seus dados reais)
   const produtos = [
     { id: 1, nome: 'Tênis Adidas X', marca: 'Adidas', categoria: 'Esporte e lazer', genero: 'Masculino', estado: 'Novo' },
     { id: 2, nome: 'Camiseta K-Swiss Y', marca: 'K-Swiss', categoria: 'Casual', genero: 'Feminino', estado: 'Usado' },
@@ -19,7 +18,7 @@ function ProdutosPage() {
 
   return (
     <div>
-      <Header />
+      {/* Header REMOVIDO – já vem do App.jsx */}
       <ProdutosFiltrados produtos={produtos} />
       <Footer />
     </div>
