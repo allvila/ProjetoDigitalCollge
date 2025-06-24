@@ -1,4 +1,4 @@
-    import { Link } from 'react-router-dom';
+/*     import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
@@ -31,3 +31,4 @@ function Navbar() {
 }
 
 export default Navbar;
+ */

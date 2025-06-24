@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { CartContext } from '../contexts/CartContext';
 
+
 function ProdutoCard({ produto }) {
   const { addToCart } = useContext(CartContext);
 
