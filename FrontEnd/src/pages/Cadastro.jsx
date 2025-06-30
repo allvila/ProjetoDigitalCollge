@@ -1,65 +1,44 @@
-// Login.jsx
+// src/pages/Cadastro.jsx
 import React from 'react';
-import './Login.css';
-
+import './Login.css'; // Reaproveita o mesmo CSS do Login
 import imagemSapatos from '../assets/SAPDI.png';
 import segundaImagemSapatos from '../assets/SAPES.png';
+import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
-
-
-import Footer from '../components/Footer'; // <--- Certifique-se de que o caminho está correto
 
 const googleIconUrl = "https://img.icons8.com/color/48/google-logo.png";
 const facebookIconUrl = "https://img.icons8.com/color/48/facebook-new.png";
-const metamaskIconUrl = "https://img.icons8.com/color/48/metamask-logo.png";
 
-
-
-function Login() {
+export default function Cadastro() {
   const navigate = useNavigate();
+
   return (
     <div className="login-screen-wrapper">
       <div className="login-content-area">
         <div className="login-form-block">
           <div className="login-form-content">
-            <h2 className="form-title">Acesse sua conta</h2>
+            <h2 className="form-title">Crie sua conta</h2>
             <p className="form-subtitle">
-              Novo cliente? Então registre-se{' '}
-              <span className="form-link" onClick={() => navigate('/cadastro')}>
-                aqui
-              </span>.
+              Já possui uma conta? Entre <span className="form-link" onClick={() => navigate('/login')}>aqui</span>.
             </p>
-
-
             <form>
               <div className="form-group">
-                <label htmlFor="loginEmail" className="form-label">Login *</label>
+                <label htmlFor="email" className="form-label">Email *</label>
                 <input
-                  type="text"
-                  id="loginEmail"
-                  placeholder="Insira seu login ou email"
+                  type="email"
+                  id="email"
+                  placeholder="Insira seu email"
                   className="form-input"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="loginSenha" className="form-label">Senha *</label>
-                <input
-                  type="password"
-                  id="loginSenha"
-                  placeholder="Insira sua senha"
-                  className="form-input"
-                />
-              </div>
-              <span className="form-forgot-password">Esqueci minha senha</span>
               <button type="submit" className="form-button">
-                Acessar Conta
+                Criar Conta
               </button>
             </form>
             <p className="form-social-text">Ou faça login com</p>
             <div className="form-social-icons-container">
               <img src={googleIconUrl} alt="Google" className="form-social-icon" />
               <img src={facebookIconUrl} alt="Facebook" className="form-social-icon" />
-              <img src={metamaskIconUrl} alt="Metamask" className="form-social-icon" />
             </div>
           </div>
         </div>
@@ -77,10 +56,7 @@ function Login() {
         />
       </div>
 
-      {/* Footer no final da tela */}
       <Footer />
     </div>
   );
 }
-
-export default Login;

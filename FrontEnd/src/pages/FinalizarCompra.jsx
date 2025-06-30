@@ -1,103 +1,185 @@
-import React, { useState } from 'react';
+// src/pages/FinalizarCompra.jsx
+
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
+import { CartContext } from '../contexts/CartContext';
 
 export default function FinalizarCompra() {
+  const { cart } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const [formDados, setFormDados] = useState({
+    nome: '', cpf: '', email: '', celular: '',
+    endereco: '', bairro: '', cidade: '', cep: '', complemento: '',
+    numeroCartao: '', nomeCartao: '', validade: '', cvv: ''
+  });
   const [metodoPagamento, setMetodoPagamento] = useState('cartao');
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormDados({ ...formDados, [name]: value });
+  };
+
+  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantidade, 0);
+  const frete = subtotal > 0 ? 0 : 0;
+  const desconto = subtotal > 0 ? 30 : 0;
+  const total = subtotal - desconto + frete;
+
+  const handlePagamento = () => {
+    if (!formDados.nome || !formDados.email || cart.length === 0) {
+      alert('Preencha o formulário e adicione ao menos um item ao carrinho.');
+      return;
+    }
+
+    const dadosCompra = {
+      pessoais: {
+        nome: formDados.nome,
+        cpf: formDados.cpf,
+        email: formDados.email,
+        celular: formDados.celular,
+      },
+      entrega: {
+        endereco: formDados.endereco,
+        bairro: formDados.bairro,
+        cidade: formDados.cidade,
+        cep: formDados.cep,
+      },
+      pagamento: {
+        titular: formDados.nomeCartao,
+        finalCartao: formDados.numeroCartao.slice(-4).padStart(16, '*'),
+      },
+      produto: cart[0] || {},
+      total: total,
+    };
+
+    navigate('/compra-sucesso', { state: dadosCompra });
+  };
+
   return (
-    <div className="min-h-screen bg-[#F9F8FC] p-8 flex flex-col gap-10 lg:flex-row lg:justify-center">
-      
-      {/* FORMULÁRIOS */}
-      <div className="w-full lg:w-2/3 bg-white p-6 rounded-xl shadow space-y-8">
-        <h2 className="text-2xl font-bold">Finalizar Compra</h2>
+    <div className="flex flex-col min-h-screen bg-[#F9F8FC]">
+      <main className="flex-grow p-8 flex justify-center">
+        <div className="flex flex-col lg:flex-row gap-10 w-full max-w-7xl">
+          <div className="w-full lg:w-2/3 bg-white p-6 rounded-xl shadow space-y-10">
+            <h2 className="text-2xl font-bold">Finalizar Compra</h2>
 
-        {/* INFORMAÇÕES PESSOAIS */}
-        <section>
-          <h3 className="text-lg font-semibold border-b pb-2 mb-4">Informações Pessoais</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input className="input" placeholder="Nome Completo *" />
-            <input className="input" placeholder="CPF *" />
-            <input className="input" placeholder="E-mail *" />
-            <input className="input" placeholder="Celular *" />
+            <section>
+              <h3 className="text-lg font-semibold border-b pb-2 mb-6">Informações Pessoais</h3>
+              <div className="grid grid-cols-1 gap-6">
+                {[['nome', 'Nome Completo'], ['cpf', 'CPF'], ['email', 'E-mail'], ['celular', 'Celular']].map(([name, label]) => (
+                  <label key={name} className="block">
+                    <span className="text-sm font-medium text-gray-700">{label} *</span>
+                    <input name={name} value={formDados[name]} onChange={handleChange} className="mt-1 w-full bg-gray-100 p-3 rounded-md" placeholder={label} />
+                  </label>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-lg font-semibold border-b pb-2 mb-6">Informações de Entrega</h3>
+              <div className="grid grid-cols-1 gap-6">
+                {[['endereco', 'Endereço'], ['bairro', 'Bairro'], ['cidade', 'Cidade'], ['cep', 'CEP'], ['complemento', 'Complemento']].map(([name, label]) => (
+                  <label key={name} className="block">
+                    <span className="text-sm font-medium text-gray-700">
+                      {label} {label !== 'Complemento' && '*'}
+                    </span>
+                    <input name={name} value={formDados[name]} onChange={handleChange} className="mt-1 w-full bg-gray-100 p-3 rounded-md" placeholder={label} />
+                  </label>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-lg font-semibold border-b pb-2 mb-6">Informações de Pagamento</h3>
+
+              <div className="flex gap-6 mb-6">
+                {['cartao', 'pix', 'boleto'].map((tipo) => (
+                  <label key={tipo} className="flex items-center gap-2 text-sm">
+                    <input
+                      type="radio"
+                      name="pagamento"
+                      value={tipo}
+                      checked={metodoPagamento === tipo}
+                      onChange={() => setMetodoPagamento(tipo)}
+                    />
+                    {tipo === 'cartao' && 'Cartão de Crédito'}
+                    {tipo === 'pix' && 'Pix'}
+                    {tipo === 'boleto' && 'Boleto'}
+                  </label>
+                ))}
+              </div>
+
+              {metodoPagamento === 'cartao' && (
+                <div className="grid grid-cols-1 gap-6">
+                  {[['numeroCartao', 'Número do Cartão'], ['nomeCartao', 'Nome no Cartão'], ['validade', 'Validade (MM/AA)'], ['cvv', 'CVV']].map(([name, label]) => (
+                    <label key={name} className="block">
+                      <span className="text-sm font-medium text-gray-700">{label} *</span>
+                      <input name={name} value={formDados[name]} onChange={handleChange} className="mt-1 w-full bg-gray-100 p-3 rounded-md" placeholder={label} />
+                    </label>
+                  ))}
+                </div>
+              )}
+
+              {metodoPagamento === 'pix' && (
+                <div className="bg-gray-50 p-4 rounded-md text-sm text-gray-700">
+                  Ao finalizar, um QR Code será gerado para pagamento imediato via Pix.
+                </div>
+              )}
+
+              {metodoPagamento === 'boleto' && (
+                <div className="bg-gray-50 p-4 rounded-md text-sm text-gray-700">
+                  O boleto será gerado e enviado para o seu e-mail após finalizar o pedido.
+                </div>
+              )}
+            </section>
           </div>
-        </section>
 
-        {/* INFORMAÇÕES DE ENTREGA */}
-        <section>
-          <h3 className="text-lg font-semibold border-b pb-2 mb-4">Informações de Entrega</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input className="input" placeholder="Endereço *" />
-            <input className="input" placeholder="Bairro *" />
-            <input className="input" placeholder="Cidade *" />
-            <input className="input" placeholder="CEP *" />
-            <input className="input" placeholder="Complemento" />
+          <div className="w-full lg:w-1/3 bg-white p-6 rounded-xl shadow h-fit space-y-6">
+            <h2 className="text-lg font-bold">Resumo do Pedido</h2>
+
+            {cart.length > 0 ? (
+              <div className="space-y-2 text-sm">
+                {cart.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center">
+                    <span>{item.quantidade}x {item.nome}</span>
+                    <span>R$ {(item.price * item.quantidade).toFixed(2)}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-gray-500">Nenhum item no carrinho.</p>
+            )}
+
+            <div className="text-sm space-y-1 pt-2 border-t">
+              <div className="flex justify-between"><span>Subtotal:</span><span>R$ {subtotal.toFixed(2)}</span></div>
+              <div className="flex justify-between"><span>Frete:</span><span>R$ {frete.toFixed(2)}</span></div>
+              <div className="flex justify-between"><span>Desconto:</span><span>- R$ {desconto.toFixed(2)}</span></div>
+            </div>
+
+            <div className="flex justify-between text-lg font-bold bg-orange-50 p-3 rounded">
+              <span>Total</span>
+              <span>R$ {total.toFixed(2)}</span>
+            </div>
+
+            <p className="text-xs text-gray-500 text-right">
+              ou 10x de R$ {(total / 10).toFixed(2)} sem juros
+            </p>
+
+            <button
+              onClick={handlePagamento}
+              disabled={cart.length === 0}
+              className={`w-full ${
+                cart.length === 0
+                  ? 'bg-yellow-200 cursor-not-allowed'
+                  : 'bg-[#f7a823] hover:bg-yellow-500'
+              } text-white font-semibold py-3 rounded`}
+            >
+              Realizar Pagamento
+            </button>
           </div>
-        </section>
-
-        {/* INFORMAÇÕES DE PAGAMENTO */}
-        <section>
-          <h3 className="text-lg font-semibold border-b pb-2 mb-4">Informações de Pagamento</h3>
-          
-          {/* MÉTODOS DE PAGAMENTO */}
-          <div className="flex gap-4 mb-6">
-            <label className="flex items-center gap-2">
-              <input type="radio" name="pagamento" value="cartao" checked={metodoPagamento === 'cartao'} onChange={() => setMetodoPagamento('cartao')} />
-              Cartão de Crédito
-            </label>
-            <label className="flex items-center gap-2">
-              <input type="radio" name="pagamento" value="pix" checked={metodoPagamento === 'pix'} onChange={() => setMetodoPagamento('pix')} />
-              Pix
-            </label>
-            <label className="flex items-center gap-2">
-              <input type="radio" name="pagamento" value="boleto" checked={metodoPagamento === 'boleto'} onChange={() => setMetodoPagamento('boleto')} />
-              Boleto
-            </label>
-          </div>
-
-          {/* CAMPOS POR MÉTODO */}
-          {metodoPagamento === 'cartao' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input className="input" placeholder="Número do Cartão *" />
-              <input className="input" placeholder="Nome no Cartão *" />
-              <input className="input" placeholder="Validade (MM/AA) *" />
-              <input className="input" placeholder="CVV *" />
-            </div>
-          )}
-
-          {metodoPagamento === 'pix' && (
-            <div className="bg-gray-50 p-4 rounded-md text-sm text-gray-700">
-              Ao finalizar, um QR Code será gerado para pagamento imediato via Pix.
-            </div>
-          )}
-
-          {metodoPagamento === 'boleto' && (
-            <div className="bg-gray-50 p-4 rounded-md text-sm text-gray-700">
-              O boleto será gerado e enviado para o seu e-mail após finalizar o pedido.
-            </div>
-          )}
-        </section>
-      </div>
-
-      {/* RESUMO DO PEDIDO */}
-      <div className="w-full lg:w-1/3 bg-white p-6 rounded-xl shadow h-fit space-y-4">
-        <h2 className="text-lg font-bold">Resumo do Pedido</h2>
-
-        <div className="text-sm space-y-1">
-          <div className="flex justify-between"><span>Subtotal:</span><span>R$ 219,00</span></div>
-          <div className="flex justify-between"><span>Frete:</span><span>R$ 0,00</span></div>
-          <div className="flex justify-between"><span>Desconto:</span><span>- R$ 30,00</span></div>
         </div>
-
-        <div className="flex justify-between text-lg font-bold bg-orange-50 p-3 rounded">
-          <span>Total</span>
-          <span>R$ 219,00</span>
-        </div>
-
-        <p className="text-xs text-gray-500 text-right">ou 10x de R$ 21,00 sem juros</p>
-
-        <button className="w-full bg-[#f7a823] hover:bg-yellow-500 text-white font-semibold py-3 rounded">
-          Realizar Pagamento
-        </button>
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 }

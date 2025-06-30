@@ -1,50 +1,53 @@
 /* Login.css */
 
-/* Novo: Invólucro para a tela de login que ocupa tudo e tem o fundo lilás */
+/* Invólucro para a tela de login que ocupa tudo e tem o fundo lilás */
 .login-screen-wrapper {
   background-color: #c0c0fd; /* Cor de fundo lilás SÓ para esta tela */
   min-height: 100vh;         /* Ocupa a altura inteira da tela */
   width: 100%;               /* Ocupa a largura inteira da tela */
-  display: flex;             /* Usaremos flex para centralizar o conteúdo de 1440px */
-  justify-content: center;   /* Centraliza horizontalmente */
-  align-items: flex-start;   /* Alinha o bloco de conteúdo no topo. Mude para 'center' se quiser centralizar verticalmente também */
-  padding-top: 50px;         /* Um espaço no topo, ajuste conforme necessário. Remova se usar align-items: center */
-  overflow: hidden;          /* Evita barras de rolagem no wrapper */
+  display: flex;             /* Flex para empilhar conteúdo e footer */
+  flex-direction: column;    /* NOVO: empilhar conteúdo + footer */
+  justify-content: flex-start;
+  align-items: center;       /* Centraliza horizontalmente */
+  padding-top: 50px;         /* Espaço no topo */
+  overflow: hidden;
 }
 
-/* Conteúdo principal da página de login (o bloco de 1440px) */
-/* Renomeado de .login-page-container */
+/* Conteúdo principal da página de login */
 .login-content-area {
-  width: 1440px;
-  position: relative; /* ESSENCIAL para o posicionamento absoluto dos sapatos e formulário */
-  /* min-height: 100vh; */ /* Não precisa mais de min-height aqui se o wrapper já tem */
-  /* margin: 0 auto; */   /* Não precisa mais se o wrapper está centralizando com flex */
-  /* overflow: hidden; */ /* Pode ser útil aqui também se o conteúdo vazar dos 1440px */
+  width: 100%;
+  max-width: 1440px;
+  display: flex;             /* NOVO: Layout lado a lado */
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  padding: 0 5%;             /* Responsivo nas laterais */
+  gap: 40px;                 /* Espaço entre os blocos */
 }
 
+
+/* Bloco com o formulário de login */
 .login-form-block {
-  position: absolute;
-  top: 100px; /* ANTES: top: 30% | Vamos usar pixels para mais controle. Aumente este valor para descer o formulário. */
-  left: 5%;
-  /* transform: translateY(-50%); */ /* <<<---- A parte que causava o problema foi REMOVIDA daqui */
+  position: relative;
   z-index: 10;
+  max-width: 580px;
+  width: 100%;
 }
+
 
 /* Conteúdo interno do formulário (o container branco) */
 .login-form-content {
   background-color: white;
   padding: 30px 40px;
-  border-radius: 8px;
+  border-radius: 1px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   width: 583px;
   font-family: Arial, sans-serif;
   color: #333;
-  border: 3px solid #C92071;
-  /* height: 560px; */ /* Se você tinha uma altura fixa, ela permanece aqui */
-  /* box-sizing: border-box; */
+ /*  border: 3px solid #C92071; */
 }
 
-/* ... (o restante das suas classes: .form-title, .form-input, .shoe-image-one, etc. permanecem iguais) ... */
 .form-title {
   font-size: 22px;
   font-weight: bold;
@@ -128,18 +131,29 @@
 
 .shoe-image-one {
   position: absolute;
-  top: 200px; /* ANTES: top: 50% | Ajuste este valor para posicionar o sapato verticalmente */
-  right: 10%;
-  transform: rotate(25deg); /* <<<---- REMOVIDO o translateY(-50%) daqui, mas mantido o rotate() */
-  width: 300px;
+  top: 40px;
+  right: 14%;
+  transform: rotate(25deg);
+  width: 260px;
   height: auto;
 }
 
 .shoe-image-two {
   position: absolute;
-  top: 80px; /* ANTES: top: 30% | Ajuste este valor para posicionar o sapato verticalmente */
+  top: -90px;
   left: 50%;
-  transform: rotate(-15deg); /* <<<---- REMOVIDO o translateY(-50%) daqui, mas mantido o rotate() */
-  width: 300px;
+  transform: rotate(-15deg);
+  width: 260px;
   height: auto;
+}
+footer {
+  width: 100%;
+  background-color: #1e1e1e;
+  color: white;
+  padding: 40px 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  font-size: 14px;
 }
