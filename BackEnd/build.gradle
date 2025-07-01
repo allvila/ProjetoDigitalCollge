@@ -40,3 +40,29 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+dependencies {
+    // Para criar APIs web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // Para persistência de dados com JPA (banco de dados)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    // Para segurança (criptografar senhas, etc.)
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    
+    // Para validações (ex: @Email, @NotBlank)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    
+    // Driver do banco de dados que você for usar (ex: H2, PostgreSQL)
+    runtimeOnly 'com.h2database:h2' // Banco de dados em memória para teste
+    // runtimeOnly 'org.postgresql:postgresql' // Exemplo para PostgreSQL
+}
+dependencies {
+    // ... outras dependências que você já tem
+
+    // Dependências para JSON Web Token (JWT)
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' 
+}
